@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('images (2).jpeg'); /* Substitua 'background.jpg' pelo caminho da sua imagem de fundo */
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            max-width: 300px;
+            width: 100%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            color: #FF0000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Login</h1>
+    <form onsubmit="return loginUser()">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+
+    <p>Não tem uma conta? <a href="cadastro.html">Crie uma agora</a>.</p>
+
+    <script>
+        function loginUser() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Obtenha os usuÃ¡rios armazenados no localStorage.
+            const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Verifique se o usuÃ¡rio existe e a senha estÃ¡ correta.
+            const user = storedUsers.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                // Armazene o nome do usuÃ¡rio logado
+                localStorage.setItem('loggedInUser', username);
+
+                // Se a autenticaÃ§Ã£o for bem-sucedida, redirecione para a calculadora.
+                window.location.replace('calculadora.html');
+            } else {
+                alert('usuario ou senha inválido');
+            }
+
+            // Certifique-se de retornar false para evitar o envio do formulÃ¡rio.
+            return false;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>calc G</title>
+  <style>
+     
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: var(--background-color, #333);
+    }
+    
+    h1 {
+      color: var(--text-color, #00ced1);
+      text-align: center;
+    }
+
+    /* Adicione os estilos do menu aqui */
+    #theme-menu {
+      margin-top: 20px;
+      display: flex; 
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #theme-select {
+      margin-bottom: 10px;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    #change-theme-button {
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #2196F3;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+
+    #calculator-container {
+      margin-top: 20px;
+    }
+
+    #calculator {
+   background-color: var(--calculator-bg-color, #666);
+   padding: 20px;
+   border-radius: 8px;
+   box-shadow: var(--calculator-shadow, 0 0 20px rgba(0, 0, 0, 0.7));
+   border: var(--calculator-border, none);
+    position: relative;
+    }
+    
+    input[type="text"] {
+      width: calc(100% - 20px);
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #444;
+      color: #fff;
+      text-align: right;
+      transition: background-color 0.3s;
+      overflow: hidden;
+    }
+    
+    input[type="button"] {
+  width: 48px;
+  height: 48px;
+  font-size: 16px;
+  margin: 5px;
+  background-color: #999;
+  border: 1px solid #555;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s, transform 0.1s;
+}
+    
+    input[type="button"]:active {
+      transform: scale(0.9);
+    }
+
+    input[type="button"].operator {
+      background-color: #ff8c00;
+    }
+
+    input[type="button"].operator:active {
+      background-color: #e07b00;
+    }
+
+    @keyframes displayAnimation {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    
+    }
+  </style>
+</head>
+<body>
+
+  <h1>calc G</h1>
+  <!-- Continuação do código para a calculadora -->
+  <div id="calculator-container">
+    <div id="calculator">
+      <input type="text" id="display" readonly>
+      <br>
+      <input type="button" value="7" onclick="appendToDisplay('7')">
+      <input type="button" value="8" onclick="appendToDisplay('8')">
+      <input type="button" value="9" onclick="appendToDisplay('9')">
+      <input type="button" value="÷" class="operator" onclick="appendToDisplay('÷')">
+      <input type="button" value="⌫" class="operator" onclick="deleteLastCharacter()">
+      <br>
+      <input type="button" value="4" onclick="appendToDisplay('4')">
+      <input type="button" value="5" onclick="appendToDisplay('5')">
+      <input type="button" value="6" onclick="appendToDisplay('6')">
+      <input type="button" value="-" class="operator" onclick="appendToDisplay('-')">
+      <br>
+      <input type="button" value="1" onclick="appendToDisplay('1')">
+      <input type="button" value="2" onclick="appendToDisplay('2')">
+      <input type="button" value="3" onclick="appendToDisplay('3')">
+      <input type="button" value="+" class="operator" onclick="appendToDisplay('+')">
+      <br>
+      <input type="button" value="0" onclick="appendToDisplay('0')">
+      <input type="button" value="." onclick="appendToDisplay('.')">
+      <input type="button" value="×" class="operator" onclick="appendToDisplay('×')">
+      <input type="button" value="=" class="operator" onclick="calculate()">
+      <br>
+      <input type="button" value="C" class="operator" onclick="clearDisplay()">
+      <input type="button" value="√" class="operator" onclick="calculateSquareRoot()">
+      <input type="button" value="%" class="operator" onclick="calculatePercentage()">
+    </div>
+  </div>
+
+  <script>
+
+    function appendToDisplay(value) {
+      const display = document.getElementById('display');
+      display.style.animation = 'none';
+      display.offsetHeight;
+      display.style.animation = 'displayAnimation 0.3s';
+      display.value += value;
+    }
+
+    function calculate() {
+      try {
+        let expression = document.getElementById('display').value;
+        expression = expression.replace(/÷/g, '/');
+        expression = expression.replace(/×/g, '*');
+        document.getElementById('display').value = eval(expression);
+      } catch (error) {
+        document.getElementById('display').value = 'Erro';
+      }
+    }
+
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+
+    function deleteLastCharacter() {
+      const display = document.getElementById('display');
+      display.style.animation = 'none';
+      display.offsetHeight;
+      display.style.animation = 'displayAnimation 0.3s';
+
+      const currentValue = display.value;
+      display.value = currentValue.substring(0, currentValue.length - 1);
+    }
+    
+    function calculateSquareRoot() {
+      try {
+        const display = document.getElementById('display');
+        display.style.animation = 'none';
+        display.offsetHeight;
+        display.style.animation = 'displayAnimation 0.3s';
+
+        const result = Math.sqrt(parseFloat(display.value));
+        display.value = Number.isInteger(result) ? result : result.toFixed(2);
+      } catch (error) {
+        display.value =        'Erro';
+      }
+    }
+
+    function calculatePercentage() {
+      try {
+        const display = document.getElementById('display');
+        display.style.animation = 'none';
+        display.offsetHeight;
+        display.style.animation = 'displayAnimation 0.3s';
+
+        const result = parseFloat(display.value) / 100;
+        display.value = Number.isInteger(result) ? result : result.toFixed(2);
+      } catch (error) {
+        display.value = 'Erro';
+      }
+    }
+  </script>
+</body>
+</html>

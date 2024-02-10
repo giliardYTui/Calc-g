@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Idade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('images (4).jpeg'); /* Substitua 'background.jpg' pelo caminho da sua imagem de fundo */
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Calculadora Idade</h1>
+    <form onsubmit="return calcularIdade()">
+        <label for="dataNascimento">Data de Nascimento:</label>
+        <input type="date" id="dataNascimento" required>
+        <br>
+        <button type="submit">Calcular Idade</button>
+        <a href="calculadora.html">voltar</a>.
+    </form>
+
+    <script>
+        function calcularIdade() {
+            const dataNascimento = new Date(document.getElementById('dataNascimento').value);
+            const hoje = new Date();
+
+            let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+
+            // Verificar se ainda nao fez aniversÃ¡rio este ano
+            if (hoje.getMonth() < dataNascimento.getMonth() ||
+                (hoje.getMonth() === dataNascimento.getMonth() && hoje.getDate() < dataNascimento.getDate())) {
+                idade--;
+            }
+
+            alert(`Voce tem aproximadamente ${idade} anos.`);
+
+            return false;
+        }
+    </script>
+</body>
+
+</html>

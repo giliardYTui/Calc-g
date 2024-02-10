@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Roboto Mono", monospace;
+      min-height: 400px;
+      background-color: #87ceeb;
+      background-size: 80vh;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      height: 100vh;
+    }
+
+    .calculator {
+      height: 25vh;
+      padding: 0;
+      width: ;
+      text-align: center;
+    }
+
+    input {
+      font-weight: bold;
+      margin: 12px;
+      border-radius: 5px;
+    }
+
+    .page-subtitle {
+      color: #ffffff;
+      margin-top: -50px;
+      padding: 15px;
+    }
+
+    .page-logo {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+  </style>
+  <img src="https://imgur.com/s01bosi.png" class="page-logo" alt="">
+  <title>Passa a Regua</title>
+</head>
+
+<body>
+  <div class="container">
+    <p class="page-subtitle">
+      Divida a conta com seus amigos. Fecha a conta e Passa a Regua!
+    </p>
+    <div class="calculator">
+      <label for="conta">Quanto deu a conta?</label></br></br>
+      <input type="number" id="conta" size"2" /></br></br>
+      <label for="dividir">Vai rachar com quantos?</label></br></br>
+      <input type="number" id="pessoas" size="2" /></br></br>
+      <button type="submit" onclick="Calcular()">Passa a regua, Consagrado!</button>
+     <a href="calculadora.html">voltar</a>.
+      <h2 id="passaRegua"></h2>
+    </div>
+  </div>
+  
+  <script>
+    function Calcular() {
+      var valorConta = document.getElementById("conta");
+      var conta = valorConta.value;
+      var valorContaNumerico = parseFloat(conta);
+
+      var numeroPessoas = document.getElementById("pessoas");
+      var pessoas = numeroPessoas.value;
+      var numeroPessoasNumerico = parseFloat(pessoas);
+
+      var contaDividida = valorContaNumerico / numeroPessoasNumerico;
+
+      var elementoPassaRegua = document.getElementById("passaRegua");
+      var passaRegua =
+        "Sua conta ficou em R$ " + contaDividida.toFixed(2) + " para cada um.";
+      elementoPassaRegua.innerHTML = passaRegua;
+    }
+  </script>
+</body>
+
+</html>

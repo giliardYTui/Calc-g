@@ -1,0 +1,109 @@
+</html><!DOCTYPE html>
+</body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('images (2).jpeg');
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    form {
+      max-width: 300px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    a {
+      color: #FF0000;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Cadastro</h1>
+  <form onsubmit="return cadastrarUsuario()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" required>
+    <br>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <p>ja tem uma conta? <a href="login.html">Faça login</a>.</p>
+
+  <script>
+    function cadastrarUsuario() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // SimulaÃ§Ã£o do armazenamento local de usuÃ¡rios
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+
+      // Verificar se o usuÃ¡rio jÃ¡ existe
+      const userExists = users.some(u => u.username === username);
+
+      if (!userExists) {
+        // Adicionar novo usuÃ¡rio
+        users.push({ username, password });
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Conta criada com sucesso. Faça login agora.');
+        window.location.replace('login.html');
+      } else {
+        alert('Este nome de usuario ja está em uso. Escolha outro.');
+      }
+
+      return false;
+    }
+  </script>
+</body>
+</html>
