@@ -90,6 +90,7 @@
         <p id="biography">Biografia: Esta é a biografia do usuário.</p>
 
         <button class="edit-button" onclick="editProfile()">Editar Informações</button>
+        <a class="edit-button" <a href="calculadora.html">voltar</a>
         <button class="delete-button" onclick="deleteAccount()">Deletar Conta</button>
     </div>
 
@@ -152,7 +153,7 @@
             // Carregar dados do localStorage
             const storedUsername = localStorage.getItem('loggedInUser') || '';
             const storedBiography = localStorage.getItem('biography') || '';
-            const storedImage = localStorage.getItem('profileImage') || 'default-profile-image.jpg';
+            const storedImage = localStorage.getItem('profileImage') || 'images (1).jpeg';
 
             // Atualizar elementos do perfil
             if (storedUsername) {
