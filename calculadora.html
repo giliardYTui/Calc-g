@@ -1,526 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>calc G</title>
+  <title>Bem-vindo à Calc G</title>
   <style>
-     
     body {
+      font-family: Arial, sans-serif;
+      background-image: url('images (2).jpeg');
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: var(--background-color, #333);
+      justify-content: center;
+      text-align: center;
+      color: #fff;
     }
-    
+
     h1 {
-      color: var(--text-color, #00ced1);
-      text-align: center;
-    }
-
-    /* Adicione os estilos do menu aqui */
-    #theme-menu {
-      margin-top: 20px;
-      display: flex; 
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #theme-select {
+      font-size: 2em;
       margin-bottom: 10px;
-      padding: 5px;
-      font-size: 16px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    #change-theme-button {
-      padding: 8px 16px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #2196F3;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      max-width: 600px;
+      line-height: 1.5;
     }
 
-    #calculator-container {
-      margin-top: 20px;
+    .buttons {
+      display: flex;
+      gap: 10px;
     }
 
-    #calculator {
-   background-color: var(--calculator-bg-color, #666);
-   padding: 20px;
-   border-radius: 8px;
-   box-shadow: var(--calculator-shadow, 0 0 20px rgba(0, 0, 0, 0.7));
-   border: var(--calculator-border, none);
-    position: relative;
-    }
-    
-    input[type="text"] {
-      width: calc(100% - 20px);
-      margin-bottom: 10px;
+    .button {
       padding: 10px;
-      font-size: 20px;
+      background-color: #4caf50;
+      color: #fff;
       border: none;
       border-radius: 4px;
-      background-color: #444;
-      color: #fff;
-      text-align: right;
-      transition: background-color 0.3s;
-      overflow: hidden;
-    }
-#custom-theme-section {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    #custom-theme-section h2 {
-      color: var(--text-color, #00ced1);
-    }
-
-    #custom-theme-section label {
-      display: block;
-      margin-top: 10px;
-      color: var(--text-color, #00ced1);
-    }
-
-    #custom-theme-section input {
-      margin-top: 5px;
-    }
-
-    #custom-theme-section button {
-      margin-top: 10px;
-      padding: 8px 16px;
-      font-size: 16px;
       cursor: pointer;
-      background-color: #2196F3;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      }
-
-   .perfil {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .perfil:hover {
-            background-color: #45a049;
-  }
-    
-    input[type="button"] {
-  width: 48px;
-  height: 48px;
-  font-size: 16px;
-  margin: 5px;
-  background-color: #999;
-  border: 1px solid #555;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  color: #fff;
-  transition: background-color 0.3s, transform 0.1s;
-}
-    
-    input[type="button"]:active {
-      transform: scale(0.9);
+      text-decoration: none;
     }
 
-    input[type="button"].operator {
-      background-color: #ff8c00;
-    }
-
-    input[type="button"].operator:active {
-      background-color: #e07b00;
-    }
-
-    @keyframes displayAnimation {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    
+    .button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
-
-<h1><div id="saudacao"></div></h1>
+  <h1>Bem-vindo à Calc G</h1>
+  <p>Explore as funcionalidades da nossa calculadora e escolha temas personalizados, incluindo o tema dos Minions. Além disso, oferecemos uma inteligência artificial chamada CALC G IA, e há também uma seção de jogos, tudo isso é exclusivo para usuários registrados, exceto a IA.</p>
   
-<input type="button" value="sair" onclick="logoutUser()">
-<a class="perfil" <a href="perfil.html">perfil</a>
-  
-  <h1>calc G</h1>
-  <!-- Adicione o menu suspenso acima da calculadora -->
-  <div id="theme-menu">
-    <label for="theme-select">Escolha um tema:</label>
-    <select id="theme-select" onchange="applyTheme(this.value)">
-      <option value="default">Tema Padrão</option>
-      <option value="superBlack">Super Preto</option>
-      <option value="superWhite">Super Branco</option>
-      <option value="natal">Natal</option>
-      <option value="aniversario">Aniversário</option>
-      <option value="festa">Festa</option>
-      <option value="halloween">Halloween</option>
-      <option value="familia">Família</option>
-      <option value="noiteFeliz">Noite Feliz</option>
-      <option value="ceuLindo">Céu Lindo</option>
-      <option value="turmaMonica">Turma da Mônica</option>
-      <option value="frozen">Frozen</option>
-      <option value="pokemon">Pokémon</option>
-      <option value="toyStory">Toy Story</option>
-      <option value="neon">Neon</option>
-      <option value="ocean">Ocean</option>
-      <option value="deepPurple">Deep Purple</option>
-      <option value="fire">Fire</option>
-      <option value="forest">Forest</option>
-      <option value="minion">Minion</option>
-      <option value="spiderman">Homem-Aranha</option>
-      <option value="coraline">Coraline</option>
- <option value="infantBlueFluorescent">Azul Fluorescente</option>
-            <option value="ben10">Ben 10</option>
-      <option value="poderosoChefinho">O Poderoso Chefinho</option>
-      <option value="fnaf">Five Nights at Freddy's</option>
-      <option value="bobEsponja">bob esponja</option>
-      <option value="mickey">mickey mause</option>
-    </select>
+  <div class="buttons">
+    <a class="button" href="cadastro.html">Criar Conta</a>
+    <a class="button" href="calc.html">Entrar como Convidado</a>
+    <a class="button" href="login.html">Login</a>
   </div>
-
-  <!-- Continuação do código para a calculadora -->
-  <div id="calculator-container">
-    <div id="calculator">
-      <input type="text" id="display" readonly>
-      <br>
-      <input type="button" value="7" onclick="appendToDisplay('7')">
-      <input type="button" value="8" onclick="appendToDisplay('8')">
-      <input type="button" value="9" onclick="appendToDisplay('9')">
-      <input type="button" value="÷" class="operator" onclick="appendToDisplay('÷')">
-      <input type="button" value="⌫" class="operator" onclick="deleteLastCharacter()">
-      <br>
-      <input type="button" value="4" onclick="appendToDisplay('4')">
-      <input type="button" value="5" onclick="appendToDisplay('5')">
-      <input type="button" value="6" onclick="appendToDisplay('6')">
-      <input type="button" value="-" class="operator" onclick="appendToDisplay('-')">
-      <br>
-      <input type="button" value="1" onclick="appendToDisplay('1')">
-      <input type="button" value="2" onclick="appendToDisplay('2')">
-      <input type="button" value="3" onclick="appendToDisplay('3')">
-      <input type="button" value="+" class="operator" onclick="appendToDisplay('+')">
-      <br>
-      <input type="button" value="0" onclick="appendToDisplay('0')">
-      <input type="button" value="." onclick="appendToDisplay('.')">
-      <input type="button" value="×" class="operator" onclick="appendToDisplay('×')">
-      <input type="button" value="=" class="operator" onclick="calculate()">
-      <br>
-      <input type="button" value="C" class="operator" onclick="clearDisplay()">
-      <input type="button" value="√" class="operator" onclick="calculateSquareRoot()">
-      <input type="button" value="%" class="operator" onclick="calculatePercentage()">
-    </div>
+  <div class="buttons">
+    <a class="button" href="ia.html">CALC G IA</a>
   </div>
-
-  <!-- Seção de tema personalizado -->
-  <div id="custom-theme-section">
-    <h2>Crie seu Próprio Tema</h2>
-    <label for="custom-bg-color">Cor de Fundo:</label>
-    <input type="color" id="custom-bg-color">
-
-    <label for="custom-text-color">Cor do Texto:</label>
-    <input type="color" id="custom-text-color">
-
-    <label for="custom-calculator-color">Cor da Calculadora:</label>
-    <input type="color" id="custom-calculator-color">
-
-<label for="custom-border">Borda:</label>
-<input type="text" id="custom-border" placeholder="ex: 2px solid #555555">
-    
-    <button
-onclick="applyCustomTheme()">Aplicar Tema Personalizado</button>
-  </div>
-
-<h1>CALCULADORAS</h1>
-  <p>calculadora <a href="passaRegual.html">passaRegua</a>.</p>
-  <p>calculadora <a href="imc.html">imc</a>.</p>
-<p>calculadora <a href="idade.html">idade</a>.</p>
-  <p>gerador de <a href="tabuada.html">tabuada</a>.</p>
-  <script>
-
-    const themes = {
-      default: {
-        '--background-color': '#333',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#666',
-      },
-      superBlack: {
-        '--background-color': '#000',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#333',
-      },
-      superWhite: {
-        '--background-color': '#fff',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#ddd',
-      },
-      natal: {
-        '--background-color': '#b71c1c',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#e53935',
-      },
-      aniversario: {
-        '--background-color': '#ffd700',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#ffeb3b',
-      },
-      festa: {
-        '--background-color': '#FF4081',
-      '--text-color': '#FFFFFF',
-      '--calculator-bg-color': '#FFD700',
-      },
-      halloween: {
-        '--background-color': '#1c2331',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#394249',
-      },
-      familia: {
-        '--background-color': '#ffeb3b',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#ffc107',
-      },
-      noiteFeliz: {
-        '--background-color': '#003366',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#0066cc',
-      },
-      ceuLindo: {
-        '--background-color': '#87CEEB',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#00BFFF',
-      },
-    turmaMonica: {
-        '--background-color': '#80BFFF',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#FF6347',
-    },
-      forest: {
-        '--background-color': '#388E3C',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#4CAF50',
-      },
-      frozen: {
-        '--background-color': '#B3E0FF',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#80BFFF',
-      },
-      pokemon: {
-        '--background-color': '#FFD700',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#FFA500',
-      },
-      toyStory: {
-        '--background-color': '#87CEEB',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#FFD700',
-      },
-      neon: {
-        '--background-color': '#00ff00',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#FF6EC7',
-      },
-      ocean: {
-        '--background-color': '#000080',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#0000cc',
-      },
-      deepPurple: {
-        '--background-color': '#673AB7',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#512DA8',
-      },
-      fire: {
-        '--background-color': '#FF5722',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#E64A19',
-      },
-      minion: {
-        '--background-color': '#ffe082',
-        '--text-color': '#000',
-        '--calculator-bg-color': '#80BFFF',
-      },
-      coraline: {
-        '--background-color': '#520066',
-        '--text-color': '#ffd700',
-        '--calculator-bg-color': '#9900cc',
-      },
-      spiderman: {
-        '--background-color': '#ff0000',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#000080',
-      },
-      infantBlueFluorescent: {
-  '--background-color': '#4B0082',
-  '--text-color': '#fff',
-  '--calculator-bg-color': '#4B0082',
-},
-      ben10: {
-        '--background-color': '#4CAF50',
-        '--text-color': '#fff',
-        '--calculator-bg-color': '#fff',
-        '--button-color': '#4CAF50',
-        '--button-border': '#2E8B57',
-        '--operator-color': '#8B4513',
-        '--operator-border': '#734B13',
-      },
-      poderosoChefinho: {
-  '--background-color': '#F5F5F5',
-  '--text-color': '#000',
-  '--calculator-bg-color': '#FFEB3B',
-},
-      fnaf: {
-    '--background-color': '#FFD700',
-  '--text-color': '#4E342E', 
-  '--calculator-bg-color': '#FFA500',
-  },
-     mickey: {
-    '--background-color': '#FFEB3B',
-  '--text-color': '#000', 
-  '--calculator-bg-color': '#FF6347',
-    },
-      bobEsponja: {
-    '--background-color': '#00AEEF',
-  '--text-color': '#FFF', 
-  '--calculator-bg-color': '#FFD700',
-      }
-  };
-function applyCustomTheme() {
-      const backgroundColor = document.getElementById('custom-bg-color').value;
-      const textColor = document.getElementById('custom-text-color').value;
-      const calculatorBgColor = document.getElementById('custom-calculator-color').value;
-  const border = document.getElementById('custom-border').value;
-  
-   // Aplicar cores e opções avançadas ao estilo da página
-   document.body.style.setProperty('--background-color', backgroundColor);
-   document.body.style.setProperty('--text-color', textColor);
-   document.body.style.setProperty('--calculator-bg-color', calculatorBgColor);
-   document.body.style.setProperty('--calculator-border', border);
-    }
-    
-    // Função para carregar o tema salvo no cookie
-    function loadSavedTheme() {
-      const savedTheme = localStorage.getItem('calculatorTheme');
-      applyTheme(savedTheme);
-      document.getElementById('theme-select').value = savedTheme || 'default';
-    }
-
-    // Carregar o tema salvo ao iniciar a página
-    loadSavedTheme();
-
-    function toggleThemeMenu() {
-      const menu = document.getElementById('theme-menu');
-      menu.classList.toggle('show-menu');
-    }
-
-    function applyTheme(theme) {
-      const selectedTheme = themes[theme] || themes.default;
-      Object.entries(selectedTheme).forEach(([property, value]) => {
-        document.body.style.setProperty(property, value);
-      });
-
-      document.getElementById('theme-menu').classList.remove('show-menu');
-
-      // Salvar o tema escolhido no cookie
-      localStorage.setItem('calculatorTheme', theme);
-    }
-
-    function appendToDisplay(value) {
-      const display = document.getElementById('display');
-      display.style.animation = 'none';
-      display.offsetHeight;
-      display.style.animation = 'displayAnimation 0.3s';
-      display.value += value;
-    }
-
-    function calculate() {
-      try {
-        let expression = document.getElementById('display').value;
-        expression = expression.replace(/÷/g, '/');
-        expression = expression.replace(/×/g, '*');
-        document.getElementById('display').value = eval(expression);
-      } catch (error) {
-        document.getElementById('display').value = 'Erro';
-      }
-    }
-
-    function clearDisplay() {
-      document.getElementById('display').value = '';
-    }
-
-    function deleteLastCharacter() {
-      const display = document.getElementById('display');
-      display.style.animation = 'none';
-      display.offsetHeight;
-      display.style.animation = 'displayAnimation 0.3s';
-
-      const currentValue = display.value;
-      display.value = currentValue.substring(0, currentValue.length - 1);
-    }
-
-    // FunÃ§Ã£o para sair
-    function logoutUser() {
-      // Aqui vocÃª pode realizar qualquer lÃ³gica necessÃ¡ria ao sair, como limpar dados de autenticaÃ§Ã£o, etc.
-      alert('Voce saiu da sua conta.');
-      // Redirecione para a pÃ¡gina de login
-window.location.replace('login.html');
-    }
-
-// Verifique se o usuÃ¡rio estÃ¡ logado
-    const loggedInUser = localStorage.getItem('loggedInUser');
-
-    if (loggedInUser) {
-      // Se o usuÃ¡rio estiver logado, exiba a saudaÃ§Ã£o
-      document.getElementById('saudacao').innerText = `ola, ${loggedInUser}!`;
-    } else {
-      // Se nÃ£o estiver logado, redirecione para a pÃ¡gina de login
-      window.location.replace('index.html');
-    }
-    
-    function calculateSquareRoot() {
-      try {
-        const display = document.getElementById('display');
-        display.style.animation = 'none';
-        display.offsetHeight;
-        display.style.animation = 'displayAnimation 0.3s';
-
-        const result = Math.sqrt(parseFloat(display.value));
-        display.value = Number.isInteger(result) ? result : result.toFixed(2);
-      } catch (error) {
-        display.value =        'Erro';
-      }
-    }
-
-    function calculatePercentage() {
-      try {
-        const display = document.getElementById('display');
-        display.style.animation = 'none';
-        display.offsetHeight;
-        display.style.animation = 'displayAnimation 0.3s';
-
-        const result = parseFloat(display.value) / 100;
-        display.value = Number.isInteger(result) ? result : result.toFixed(2);
-      } catch (error) {
-        display.value = 'Erro';
-      }
-    }
-  </script>
 </body>
 </html>
