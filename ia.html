@@ -93,7 +93,7 @@
         }
 
         function containsProgrammingKeywords(message) {
-            const programmingKeywords = ['programação', 'codigo', 'coding', 'programar', 'javascript', 'python', 'java', 'c++', 'php', 'html', 'css', 'ruby', 'typescript', 'framework', 'API', 'debug', 'IDE', 'git', 'sql', 'dev', 'backend', 'frontend', 'full stack', 'web development', 'coding bootcamp', 'machine learning', 'data science', 'chatgpt', '👨‍💻', '👩‍💻'];
+            const programmingKeywords = ['programação', 'codigo', 'coding', 'programar', 'javascript', 'python', 'java', 'c++', 'php', 'html', 'css', 'ruby', 'typescript', 'framework', 'API', 'debug', 'IDE', 'git', 'sql', 'dev', 'backend', 'frontend', 'full stack', 'web development', 'coding bootcamp', 'machine learning', 'data science', 'chatgpt', '👨‍💻', '👩‍💻', 'código']; 
             return programmingKeywords.some(keyword => message.toLowerCase().includes(keyword));
         }
 
@@ -114,7 +114,7 @@
         async function respondToUser() {
             let botResponse = "";
 
-            const apiKey = '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';
+            const apiKey = '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';
             const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
             const response = await fetch(apiUrl, {
