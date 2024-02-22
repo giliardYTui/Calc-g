@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Velha</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 10px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Jogo da Velha</h1>
+  <div id="board">
+    <div class="cell" id="cell-0-0" onclick="playerMove(0, 0)"></div>
+    <div class="cell" id="cell-0-1" onclick="playerMove(0, 1)"></div>
+    <div class="cell" id="cell-0-2" onclick="playerMove(0, 2)"></div>
+    <div class="cell" id="cell-1-0" onclick="playerMove(1, 0)"></div>
+    <div class="cell" id="cell-1-1" onclick="playerMove(1, 1)"></div>
+    <div class="cell" id="cell-1-2" onclick="playerMove(1, 2)"></div>
+    <div class="cell" id="cell-2-0" onclick="playerMove(2, 0)"></div>
+    <div class="cell" id="cell-2-1" onclick="playerMove(2, 1)"></div>
+    <div class="cell" id="cell-2-2" onclick="playerMove(2, 2)"></div>
+  </div>
+
+  <a href="calculadora.html">voltar</a>.
+
+  <script>
+    const board = [['', '', ''], ['', '', ''], ['', '', '']];
+let currentPlayer = 'X';
+
+// Função para verificar o vencedor
+function checkWinner() {
+  for (let i = 0; i < 3; i++) {
+    if (
+      board[i][0] !== '' &&
+      board[i][0] === board[i][1] &&
+      board[i][1] === board[i][2]
+    ) {
+      return board[i][0];
+    }
+
+    if (
+      board[0][i] !== '' &&
+      board[0][i] === board[1][i] &&
+      board[1][i] === board[2][i]
+    ) {
+      return board[0][i];
+    }
+  }
+
+  if (
+    board[0][0] !== '' &&
+    board[0][0] === board[1][1] &&
+    board[1][1] === board[2][2]
+  ) {
+    return board[0][0];
+  }
+
+  if (
+    board[0][2] !== '' &&
+    board[0][2] === board[1][1] &&
+    board[1][1] === board[2][0]
+  ) {
+    return board[0][2];
+  }
+
+  // Verifica se há empate
+  if (!board.flat().includes('')) {
+    return 'tie';
+  }
+
+  return null;
+}
+
+// Função para realizar a jogada do jogador humano
+function playerMove(row, col) {
+  if (board[row][col] === '' && !checkWinner()) {
+    board[row][col] = 'O';
+    currentPlayer = 'X';
+    updateBoard();
+    // Verifica o vencedor após a jogada do jogador humano
+    const winner = checkWinner();
+    if (winner) {
+      alert(`${winner} venceu!`);
+      resetBoard();
+    } else {
+      // Se não houver vencedor, é a vez da IA jogar
+      aiMove();
+    }
+  }
+}
+
+// Função para realizar a jogada da IA usando o algoritmo Minimax
+function aiMove() {
+  if (!checkWinner()) {
+    const move = bestMove();
+    board[move.i][move.j] = 'X';
+    currentPlayer = 'O';
+    updateBoard();
+    // Verifica o vencedor após a jogada da IA
+    const winner = checkWinner();
+    if (winner) {
+      alert(`${winner} venceu!`);
+      resetBoard();
+    }
+  }
+}
+
+// Função para encontrar a melhor jogada para a IA usando o algoritmo Minimax
+function bestMove() {
+  let bestScore = -Infinity;
+  let move;
+
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (board[i][j] === '') {
+        board[i][j] = 'X';
+        const score = minimax(board, 0, false);
+        board[i][j] = '';
+        if (score > bestScore) {
+          bestScore = score;
+          move = { i, j };
+        }
+      }
+    }
+  }
+
+  return move;
+}
+
+// Função Minimax
+function minimax(board, depth, isMaximizing) {
+  const scores = {
+    X: 1,
+    O: -1,
+    tie: 0
+  };
+
+  const winner = checkWinner(board);
+  if (winner !== null) {
+    return scores[winner];
+  }
+
+  if (isMaximizing) {
+    let bestScore = -Infinity;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[i][j] === '') {
+          board[i][j] = 'X';
+          const score = minimax(board, depth + 1, false);
+          board[i][j] = '';
+          bestScore = Math.max(score, bestScore);
+        }
+      }
+    }
+    return bestScore;
+  } else {
+    let bestScore = Infinity;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[i][j] === '') {
+          board[i][j] = 'O';
+          const score = minimax(board, depth + 1, true);
+          board[i][j] = '';
+          bestScore = Math.min(score, bestScore);
+        }
+      }
+    }
+    return bestScore;
+  }
+}
+
+// DOM
+function updateBoard() {
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      const cell = document.getElementById(`cell-${i}-${j}`);
+      cell.textContent = board[i][j];
+    }
+  }
+}
+
+function resetBoard() {
+  board.forEach((row, i) => {
+    row.fill('');
+    for (let j = 0; j < 3; j++) {
+      const cell = document.getElementById(`cell-${i}-${j}`);
+      cell.textContent = '';
+    }
+  });
+  }
+  </script>
+</body>
+
+</html>
