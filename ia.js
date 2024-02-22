@@ -57,7 +57,7 @@ async function sendMessage() {
             chatHistory.push({ role: 'user', content: userMessage });
 
             // Chame a função respondToUser passando a chave da API
-            const apiKey = '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';
+            const apiKey = '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';
             const botResponse = await respondToUser(apiKey);
 
             displayMessage("CALC G IA", botResponse);
